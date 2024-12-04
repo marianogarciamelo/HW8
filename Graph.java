@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Mariano Garcia Melo / Section 001
  *
  *   Note, additional comments provided throughout this source code
  *   is for educational purposes
@@ -101,10 +101,36 @@ public class Graph {
    * and/or more than one root vertex, then return -1.
    * 
    */
-  
+
   public int findRoot() {
 
-    // ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME/SECTION AT TOP OF FILE
-    return -1;
-  } 
+    // Initialize in-degree array
+    int[] inDegree = new int[numVertices];
+
+    // For each vertex u
+    for (int u = 0; u < numVertices; u++) {
+      // For each neighbor v of u
+      for (int v : adjListArr[u]) {
+        // Increment in-degree of v
+        inDegree[v]++;
+      }
+    }
+
+    // Now find vertices with in-degree zero
+    List<Integer> roots = new ArrayList<>();
+
+    for (int i = 0; i < numVertices; i++) {
+      if (inDegree[i] == 0) {
+        roots.add(i);
+      }
+    }
+
+    // If exactly one root, return its value
+    if (roots.size() == 1) {
+      int rootIndex = roots.get(0);
+      return vertexValues.get(rootIndex);
+    } else {
+      return -1;
+    }
+  }
 }
